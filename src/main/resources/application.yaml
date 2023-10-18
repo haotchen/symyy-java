@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: syyimei
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: a@199862
+    url: jdbc:mysql://www.haotchen.top:36000/syyimei?useUnicode=true&tinyInt1isBit=false&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai&allowMultiQueries=true&rewriteBatchedStatements=true
+  redis:
+    host: haotchen.top
+    port: 6379
+
+server:
+  port: 11000
+  ssl:
+    key-store: classpath:haotchen.top.pfx
+    key-store-password: 5tvqcy0k
+    key-store-type: PKCS12
