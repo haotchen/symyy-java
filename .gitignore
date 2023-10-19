@@ -31,3 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### custorm ###
+/*.ini
+/haotchen.top.pfx
+/pfx-password.txt
+/application.yaml

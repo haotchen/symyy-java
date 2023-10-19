@@ -8,13 +8,31 @@ import com.aliyuncs.exceptions.ServerException;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
 
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Properties;
+
 /**
  * 阿里云短信
  */
 public class ALiYunSms {
 
-    private static String accessKeyId = "LTAI5tQ1Sv6wUY2sf9nf4399";
-    private static String accessKeySecret = "oZEuWkU00XCAPJbV5uEbYEwVVKtP7I";
+    private static String accessKeyId;
+    private static String accessKeySecret;
+
+    {
+        Properties properties = new Properties();
+        // 读取 INI 文件
+        try {
+            properties.load(new FileReader("config.ini" ));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        // 获取键值对
+        accessKeyId = properties.getProperty("ali-acc");
+        accessKeySecret = properties.getProperty("ali-sec");
+    }
     private static String regionId = "cn-beijing";
 
     private static DefaultAcsClient initClient() throws ClientException {

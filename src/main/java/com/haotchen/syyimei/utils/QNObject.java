@@ -12,19 +12,36 @@ import com.qiniu.util.Auth;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.Properties;
 
 @Slf4j
 public class QNObject {
     // 设置好账号的ACCESS_KEY和SECRET_KEY
-    String ACCESS_KEY = "sSjmp2xJ6ZJ_WZOEAX0lqHmF14Z36gNToFX7K2qE";
-    String SECRET_KEY = "GkxUpiF-7Lt72o1OBlrM02rUbJQkPrhb14xZlrWo";
+    String acc;
+    String sec;
+
+    {
+        Properties properties = new Properties();
+        // 读取 INI 文件
+        try {
+            properties.load(new FileReader("config.ini" ));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        // 获取键值对
+        acc = properties.getProperty("qiniu-acc");
+        sec = properties.getProperty("qiniu-sec");
+    }
+
 
     // 要上传的空间（创建空间的名称）
     String bucketname = "haotchen-online";
 
     // 密钥配置
-    Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
+    Auth auth = Auth.create(acc, sec);
 
     // 构造一个带指定Zone对象的配置类,不同的七云牛存储区域调用不同的zone
     Configuration cfg = new Configuration(Zone.zone1());
